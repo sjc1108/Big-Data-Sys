@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+message Report {
+  string date = 1;      // Date of the observation in "YYYY-MM-DD" format
+  double degrees = 2;   // Observed max-temperature on this date
+}
