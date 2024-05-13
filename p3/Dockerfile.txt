@@ -1,0 +1,18 @@
+FROM python:3.8-slim
+
+# Set the working dir
+WORKDIR /usr/src/app
+
+# To copy the curr dir to container at /usr/src/app
+COPY . .
+
+RUN pip install --no-cache-dir grpcio grpcio-tools
+
+# Make 5440 available outside this docker
+EXPOSE 5440
+
+ENV PORT 5440
+
+# Run 
+CMD ["python", "server.py"]
+

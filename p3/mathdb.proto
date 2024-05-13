@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package mathdb;
+
+// The MathDb service definition.
+service MathDb {
+  // Sets a value for a given key.
+  rpc Set(SetRequest) returns (SetResponse) {}
+
+  // Gets the value for a given key.
+  rpc Get(GetRequest) returns (GetResponse) {}
+
+  // Performs addition on values found by their keys.
+  rpc Add(BinaryOpRequest) returns (BinaryOpResponse) {}
+
+  // Performs subtraction on values found by their keys.
+  rpc Sub(BinaryOpRequest) returns (BinaryOpResponse) {}
+
+  // Performs multiplication on values found by their keys.
+  rpc Mult(BinaryOpRequest) returns (BinaryOpResponse) {}
+
+  // Performs division on values found by their keys.
+  rpc Div(BinaryOpRequest) returns (BinaryOpResponse) {}
+}
+
+// The request message containing the key and value for the Set operation.
+message SetRequest {
+  string key = 1;
+  float value = 2;
+}
+
+// The response message containing any error occurred during the Set operation.
+message SetResponse {
+  string error = 1;
+}
+
+// The request message containing the key for the Get operation.
+message GetRequest {
+  string key = 1;
+}
+
+// The response message containing the value and any error occurred during the Get operation.
+message GetResponse {
+  float value = 1;
+  string error = 2;
+}
+
+// The request message for binary operations (Add, Sub, Mult, Div), containing the keys.
+message BinaryOpRequest {
+  string key_a = 1;
+  string key_b = 2;
+}
+
+// The response message for binary operations, containing the result, cache hit status, and any error.
+message BinaryOpResponse {
+  float value = 1;
+  bool cache_hit = 2;
+  string error = 3;
+}
